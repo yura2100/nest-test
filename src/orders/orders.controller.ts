@@ -8,13 +8,13 @@ export class OrdersController {
     constructor(private readonly orderService: OrdersService) {}
 
     @Get(':id')
-    getOne(@Param('id') id: string) {
-        return this.orderService.getOne(id)
+    findOne(@Param('id') id: string) {
+        return this.orderService.findOne(id)
     }
 
     @Get(':userId')
-    getAll(@Param('userId') userId: string) {
-        return this.orderService.getAll(userId)
+    findAll(@Param('userId') userId: string) {
+        return this.orderService.findAll(userId)
     }
 
     @Post()

@@ -16,7 +16,7 @@ export class Order {
             {
                 productId: { type: String, required: true },
                 name: { type: String, required: true },
-                quantity: { type: Number, default: 1 },
+                quantity: { type: Number, required: true },
             }
         ],
         required: true
@@ -29,9 +29,7 @@ export class Order {
     })
     date: Date
 
-    @Prop({
-        required: true
-    })
+    @Prop()
     status: string
 }
 

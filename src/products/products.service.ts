@@ -10,11 +10,11 @@ export class ProductsService {
         @InjectModel(Product.name) private productModel: Model<ProductDocument>
     ) {}
 
-    async getOne(id: string): Promise<Product> {
+    async findOne(id: string): Promise<Product> {
         return this.productModel.findById(id)
     }
 
-    async getAll(): Promise<Product[]> {
+    async findAll(): Promise<Product[]> {
         return this.productModel.find()
     }
 

@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import { Order, OrderDocument } from './schemas/order.schema'
@@ -13,17 +13,17 @@ export class OrdersService {
         private readonly productsService: ProductsService
     ) {}
 
-    async getOne(id: string): Promise<Order> {
+    async findOne(id: string): Promise<Order> {
         return this.orderModel.findById(id)
     }
 
-    async getAll(userId: string): Promise<Order[]> {
+    async findAll(userId: string): Promise<Order[]> {
         return this.orderModel.find().select(userId)
     }
 
     async create(createOrderDto: CreateOrderDto): Promise<Order> {
         for (const product of createOrderDto.productsList) {
-            const foundProduct = await this.productsService.getOne(product.productId)
+            const foundProduct = await this.productsService.findOne(product.productId)
 
             product.name = foundProduct.name
         }

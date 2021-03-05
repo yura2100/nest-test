@@ -7,13 +7,13 @@ export class ProductsController {
     constructor(private readonly productsService: ProductsService) {}
 
     @Get(':id')
-    getOne(@Param('id') id: string) {
-        return this.productsService.getOne(id)
+    findOne(@Param('id') id: string) {
+        return this.productsService.findOne(id)
     }
 
     @Get()
-    getAll() {
-        return this.productsService.getAll()
+    findAll() {
+        return this.productsService.findAll()
     }
 
     @Post()
