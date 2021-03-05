@@ -2,12 +2,17 @@ import { Module } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { ProductsModule } from './products/products.module'
-import { MongooseModule } from '@nestjs/mongoose'
 import { OrdersModule } from './orders/orders.module'
+import { ConfigModule } from '@nestjs/config'
+import { DatabaseModule } from './database/database.module'
+import configuration from './config/configuration'
 
 @Module({
     imports: [
-        MongooseModule.forRoot('mongodb+srv://admin:00000000@cluster0.yjpyt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'),
+        ConfigModule.forRoot({
+            load: [configuration]
+        }),
+        DatabaseModule,
         ProductsModule,
         OrdersModule
     ],
