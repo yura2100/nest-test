@@ -1,7 +1,18 @@
-import { Body, Controller, Delete, Get, Logger, Param, Post, Put } from '@nestjs/common'
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Logger,
+    Param,
+    Post,
+    Put
+} from '@nestjs/common'
 import { ProductsService } from './products.service'
 import { ProductDto } from './dto/product.dto'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags('products')
 @Controller('products')
 export class ProductsController {
     private readonly logger = new Logger(ProductsController.name)
@@ -30,10 +41,7 @@ export class ProductsController {
     }
 
     @Put(':id')
-    update(
-        @Param('id') id: string,
-        @Body() productDto: ProductDto
-    ) {
+    update(@Param('id') id: string, @Body() productDto: ProductDto) {
         this.logger.debug(`Request /products/${id} PUT`)
 
         return this.productsService.update(id, productDto)

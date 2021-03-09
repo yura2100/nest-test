@@ -2,7 +2,9 @@ import { Body, Controller, Delete, Get, Logger, Param, Post, Put } from '@nestjs
 import { OrdersService } from './orders.service'
 import { CreateOrderDto } from './dto/create-order.dto'
 import { UpdateOrderDto } from './dto/update-order.dto'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags('orders')
 @Controller('orders')
 export class OrdersController {
     private readonly logger = new Logger(OrdersController.name)
