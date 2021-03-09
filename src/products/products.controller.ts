@@ -5,12 +5,14 @@ import {
     Get,
     Logger,
     Param,
+    ParseArrayPipe,
     Post,
     Put
 } from '@nestjs/common'
 import { ProductsService } from './products.service'
 import { ProductDto } from './dto/product.dto'
-import { ApiTags } from '@nestjs/swagger'
+import { ApiBody, ApiTags } from '@nestjs/swagger'
+import { SpecDto } from './dto/spec.dto'
 
 @ApiTags('products')
 @Controller('products')
@@ -38,6 +40,16 @@ export class ProductsController {
         this.logger.debug(`Request /products/ POST`)
 
         return this.productsService.create(productDto)
+    }
+
+    @ApiBody({type: [SpecDto]})
+    @Post('search')
+    findBySpecs(
+        @Body(new ParseArrayPipe({ items: SpecDto })) specs: SpecDto[]
+    ) {
+        this.logger.debug(`Request /products/search POST`)
+
+        return this.productsService.findManyBySpecs(specs)
     }
 
     @Put(':id')
