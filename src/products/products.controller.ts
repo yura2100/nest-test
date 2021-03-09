@@ -3,66 +3,53 @@ import {
     Controller,
     Delete,
     Get,
-    Logger,
     Param,
     ParseArrayPipe,
     Post,
-    Put
+    Put,
+    UseInterceptors
 } from '@nestjs/common'
 import { ProductsService } from './products.service'
 import { ProductDto } from './dto/product.dto'
 import { ApiBody, ApiTags } from '@nestjs/swagger'
 import { SpecDto } from './dto/spec.dto'
+import { LoggingInterceptor } from '../logging.interceptor'
 
 @ApiTags('products')
 @Controller('products')
 export class ProductsController {
-    private readonly logger = new Logger(ProductsController.name)
-
     constructor(private readonly productsService: ProductsService) {}
 
     @Get(':id')
     findOne(@Param('id') id: string) {
-        this.logger.debug(`Request /products/${id} GET`)
-
         return this.productsService.findOne(id)
     }
 
     @Get()
     findAll() {
-        this.logger.debug(`Request /products/ GET`)
-
         return this.productsService.findAll()
     }
 
     @Post()
     create(@Body() productDto: ProductDto) {
-        this.logger.debug(`Request /products/ POST`)
-
         return this.productsService.create(productDto)
     }
 
-    @ApiBody({type: [SpecDto]})
+    @ApiBody({ type: [SpecDto] })
     @Post('search')
     findBySpecs(
         @Body(new ParseArrayPipe({ items: SpecDto })) specs: SpecDto[]
     ) {
-        this.logger.debug(`Request /products/search POST`)
-
         return this.productsService.findManyBySpecs(specs)
     }
 
     @Put(':id')
     update(@Param('id') id: string, @Body() productDto: ProductDto) {
-        this.logger.debug(`Request /products/${id} PUT`)
-
         return this.productsService.update(id, productDto)
     }
 
     @Delete(':id')
     remove(@Param('id') id: string) {
-        this.logger.debug(`Request /products/${id} DELETE`)
-
         return this.productsService.remove(id)
     }
 }

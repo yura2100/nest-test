@@ -34,11 +34,7 @@ export class ProductsService {
     async findManyBySpecs(specs: SpecDto[]): Promise<Product[]> {
         this.logger.debug(`Execution database query find many products by specs`)
 
-        const elemMatchArray = new Array(specs.length)
-
-        for (let i = 0; i < specs.length; i++) {
-            elemMatchArray[i] = {$elemMatch: specs[i]}
-        }
+        const elemMatchArray = specs.map((value) => ({ $elemMatch: value }))
 
         return this.productModel.find({
             specs: { $all: elemMatchArray }
