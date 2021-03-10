@@ -1,7 +1,7 @@
 import { Model } from 'mongoose'
 import { Injectable, Logger } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { Product, ProductDocument } from './schemas/product.schema'
+import { Product, ProductDocument } from './product.schema'
 import { ProductDto } from './dto/product.dto'
 import { SpecDto } from './dto/spec.dto'
 

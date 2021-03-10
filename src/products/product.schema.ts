@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document } from 'mongoose'
-import { SpecDto } from '../dto/spec.dto'
+import { SpecDto } from './dto/spec.dto'
 
 export type ProductDocument = Product & Document
 

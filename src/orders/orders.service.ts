@@ -1,14 +1,14 @@
 import { Injectable, Logger } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { Order, OrderDocument } from './schemas/order.schema'
+import { Order, OrderDocument } from './order.schema'
 import { CreateOrderDto } from './dto/create-order.dto'
 import { UpdateOrderDto } from './dto/update-order.dto'
 import { ProductsService } from '../products/products.service'
 
 @Injectable()
 export class OrdersService {
-    private readonly logger = new Logger()
+    private readonly logger = new Logger(OrdersService.name)
 
     constructor(
         @InjectModel(Order.name)

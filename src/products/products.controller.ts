@@ -6,14 +6,13 @@ import {
     Param,
     ParseArrayPipe,
     Post,
-    Put,
-    UseInterceptors
+    Put
 } from '@nestjs/common'
 import { ProductsService } from './products.service'
 import { ProductDto } from './dto/product.dto'
 import { ApiBody, ApiTags } from '@nestjs/swagger'
 import { SpecDto } from './dto/spec.dto'
-import { LoggingInterceptor } from '../logging.interceptor'
+
 
 @ApiTags('products')
 @Controller('products')

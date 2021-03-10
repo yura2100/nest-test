@@ -1,7 +1,7 @@
 import { ProductsListDto } from './products-list.dto'
 
 export class OrderDto {
-    readonly userId: number
+    readonly userId: string
 
     readonly productsList: ProductsListDto[]
 

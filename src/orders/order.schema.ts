@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document } from 'mongoose'
-import { ProductsListDto } from '../dto/products-list.dto'
+import { ProductsListDto } from './dto/products-list.dto'
 
 export type OrderDocument = Order & Document
 
@@ -9,7 +9,7 @@ export class Order {
     @Prop({
         required: true
     })
-    userId: number
+    userId: string
 
     @Prop({
         type: [

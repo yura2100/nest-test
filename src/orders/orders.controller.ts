@@ -1,8 +1,18 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    Post,
+    Put,
+    UseGuards
+} from '@nestjs/common'
 import { OrdersService } from './orders.service'
 import { CreateOrderDto } from './dto/create-order.dto'
 import { UpdateOrderDto } from './dto/update-order.dto'
 import { ApiTags } from '@nestjs/swagger'
+import { JwtAuthGuard } from '../auth/jwt-auth.guard'
 
 @ApiTags('orders')
 @Controller('orders')
@@ -19,6 +29,7 @@ export class OrdersController {
         return this.orderService.findAll(userId)
     }
 
+    @UseGuards(JwtAuthGuard)
     @Post()
     create(@Body() createOrderDto: CreateOrderDto) {
         return this.orderService.create(createOrderDto)
