@@ -17,6 +17,11 @@ export class Product {
     description: string
 
     @Prop({
+        required: true
+    })
+    category: string
+
+    @Prop({
         type: [
             {
                 key: { type: String, required: true },

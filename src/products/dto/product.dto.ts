@@ -12,6 +12,10 @@ export class ProductDto {
     @IsNotEmpty()
     readonly description: string
 
+    @ApiProperty()
+    @IsNotEmpty()
+    readonly category: string
+
     @ApiProperty({
         required: false,
         default: [],

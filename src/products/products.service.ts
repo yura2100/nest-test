@@ -41,6 +41,26 @@ export class ProductsService {
         })
     }
 
+    async groupAndCountByCategory() {
+        this.logger.debug(`Execution database query count products by category`)
+
+        return this.productModel.aggregate([
+            {
+                $group: { _id: '$category', total: { $sum: 1 } }
+            }
+        ])
+    }
+
+    async groupAndCountBySpecs(specs: SpecDto[]) {
+        this.logger.debug(`Execution database query count products by specs`)
+
+        const elemMatchArray = specs.map((value) => ({ $elemMatch: value }))
+
+        return this.productModel.count({
+            specs: { $all: elemMatchArray }
+        })
+    }
+
     async create(productDto: ProductDto): Promise<Product> {
         this.logger.debug(`Execution database query create new product`)
 

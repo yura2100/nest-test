@@ -19,14 +19,19 @@ import { SpecDto } from './dto/spec.dto'
 export class ProductsController {
     constructor(private readonly productsService: ProductsService) {}
 
-    @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.productsService.findOne(id)
-    }
-
     @Get()
     findAll() {
         return this.productsService.findAll()
+    }
+
+    @Get('count')
+    groupAndCountByCategory() {
+        return this.productsService.groupAndCountByCategory()
+    }
+
+    @Get(':id')
+    findOne(@Param('id') id: string) {
+        return this.productsService.findOne(id)
     }
 
     @Post()
@@ -40,6 +45,14 @@ export class ProductsController {
         @Body(new ParseArrayPipe({ items: SpecDto })) specs: SpecDto[]
     ) {
         return this.productsService.findManyBySpecs(specs)
+    }
+
+    @ApiBody({ type: [SpecDto] })
+    @Post('count')
+    groupAndCountBySpecs(
+        @Body(new ParseArrayPipe({ items: SpecDto })) specs: SpecDto[]
+    ) {
+        return this.productsService.groupAndCountBySpecs(specs)
     }
 
     @Put(':id')
