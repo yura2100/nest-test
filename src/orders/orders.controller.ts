@@ -29,7 +29,6 @@ export class OrdersController {
         return this.orderService.findAll(userId)
     }
 
-    @UseGuards(JwtAuthGuard)
     @Post()
     create(@Body() createOrderDto: CreateOrderDto) {
         return this.orderService.create(createOrderDto)
